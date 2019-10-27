@@ -31,7 +31,6 @@ typedef union {
 user_config_t user_config;
 
 #define SPACEFN         LT(_FN1, KC_SPC)
-#define DELETEFN        LT(_FN1, KC_BSPC)
 
 uint32_t rgbMode;
 
@@ -54,8 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,  KC_Q,      KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS, KC_END, \
     KC_CAPS, KC_A,      KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_ENT,  KC_PGUP, \
     KC_LSFT, KC_Z,      KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT, KC_UP,   KC_PGDN, \
-    KC_LCTL, TD(TD_WIN),KC_LALT, DELETEFN,KC_RCTL,                   KC_SPC,  XXXXXXX, OSL(_FN1),KC_APP, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
-    // KC_LCTL, TD_WIN,KC_LALT, SPACEFN, KC_RCTL,                   KC_SPC,  XXXXXXX, OSL(_FN1),KC_APP, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
+    KC_LCTL, TD(TD_WIN),KC_LALT, KC_SPC,  KC_RCTL,                   KC_SPC,  XXXXXXX, OSL(_FN1),KC_APP, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
   ),
 
 /* Keymap _FN1: (Function Layer)
@@ -116,7 +114,6 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         #endif
         rgblight_sethsv(0, 0, 100);
         rgblight_mode(rgbMode);
-        // if (user_config.rgb_layer_change) { rgblight_sethsv_noeeprom_red(); rgblight_mode_noeeprom(1); }
         break;
       case _FN1:
         user_config.current_layer = _FN1;
@@ -125,7 +122,6 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         #endif
         rgblight_mode(RGBLIGHT_MODE_STATIC_LIGHT);
         rgblight_setrgb(0x00, 0xFF, 0xFF);
-        // if (user_config.rgb_layer_change) { rgblight_sethsv_noeeprom_magenta(); rgblight_mode_noeeprom(1); }
         break;
       default: //  for any other layers, or the default layer
         #ifdef CONSOLE_ENABLE
@@ -134,7 +130,6 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         user_config.current_layer = _BASE;
         rgblight_mode(rgbMode);
         rgblight_setrgb(0xFF, 0xFF, 0xFF);
-        // if (user_config.rgb_layer_change) { rgblight_sethsv_noeeprom_cyan(); rgblight_mode_noeeprom(1); }
         break;
     }
   }
